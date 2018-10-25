@@ -108,6 +108,9 @@
 		599E6A77214D8EFF00E45C9E /* indigo_focuser_nstep.c in Sources */ = {isa = PBXBuildFile; fileRef = 599E6A76214D8EEB00E45C9E /* indigo_focuser_nstep.c */; };
 		59B636AF20A74CD400EF2D52 /* indigo_usb_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 59B636AD20A74CD400EF2D52 /* indigo_usb_utils.h */; };
 		59B636B020A74CD400EF2D52 /* indigo_usb_utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 59B636AE20A74CD400EF2D52 /* indigo_usb_utils.c */; };
+		59C0EB91218117EF003CB7DA /* libatikcameras.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59EC55A1218103EB008DFB4C /* libatikcameras.dylib */; };
+		59C0EB922181180C003CB7DA /* libatikcameras.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 59EC55A1218103EB008DFB4C /* libatikcameras.dylib */; };
+		59C0EB93218118E3003CB7DA /* libatik.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9EA6A81DBE21DE00E11841 /* libatik.a */; };
 		59C499E51EFADFE000E750AA /* indigo_ccd_ica.h in Headers */ = {isa = PBXBuildFile; fileRef = 59C499E11EFADFE000E750AA /* indigo_ccd_ica.h */; };
 		59C499E61EFADFE000E750AA /* indigo_ccd_ica.m in Sources */ = {isa = PBXBuildFile; fileRef = 59C499E21EFADFE000E750AA /* indigo_ccd_ica.m */; };
 		59C499E71EFADFE000E750AA /* indigo_ica_ptp.h in Headers */ = {isa = PBXBuildFile; fileRef = 59C499E31EFADFE000E750AA /* indigo_ica_ptp.h */; };
@@ -307,7 +310,6 @@
 		9D9EA6B51DBFA30600E11841 /* indigo_guider_driver.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D9EA6AF1DBFA30600E11841 /* indigo_guider_driver.h */; };
 		9D9EA6B61DBFA30600E11841 /* indigo_wheel_driver.c in Sources */ = {isa = PBXBuildFile; fileRef = 9D9EA6B01DBFA30600E11841 /* indigo_wheel_driver.c */; };
 		9D9EA6B71DBFA30600E11841 /* indigo_wheel_driver.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D9EA6B11DBFA30600E11841 /* indigo_wheel_driver.h */; };
-		9DAC59CF1DC0A7B200AE410D /* libatik.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9EA6A81DBE21DE00E11841 /* libatik.a */; };
 		9DAC59D31DC0A8AD00AE410D /* indigo_focuser_driver.c in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC59D11DC0A8AD00AE410D /* indigo_focuser_driver.c */; };
 		9DAC59D41DC0A8AD00AE410D /* indigo_focuser_driver.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DAC59D21DC0A8AD00AE410D /* indigo_focuser_driver.h */; };
 		9DAC59D91DC24E1400AE410D /* indigo_focuser_fcusb.c in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC59D61DC24E1400AE410D /* indigo_focuser_fcusb.c */; };
@@ -478,6 +480,7 @@
 			dstSubfolderSpec = 16;
 			files = (
 				9D07F7D3216F5F9100330726 /* libtoupcam.dylib in CopyFiles */,
+				59C0EB922181180C003CB7DA /* libatikcameras.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,7 +682,6 @@
 		59399D8B2177D316002886CA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		59399D8D2177D316002886CA /* optec_simulator.ino */ = {isa = PBXFileReference; lastKnownFileType = text; path = optec_simulator.ino; sourceTree = "<group>"; };
 		59399D8E2177D316002886CA /* indigo_focuser_optec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = indigo_focuser_optec.h; sourceTree = "<group>"; };
-		59399D8F2177D391002886CA /* tcf_technical_manual.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = tcf_technical_manual.pdf; path = ../../../../Desktop/tcf_technical_manual.pdf; sourceTree = "<group>"; };
 		593AD1011EF8399500C059BC /* indigo_guider_asi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = indigo_guider_asi.c; sourceTree = "<group>"; };
 		593AD1031EF8399500C059BC /* indigo_guider_asi_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = indigo_guider_asi_main.c; sourceTree = "<group>"; };
 		593AD1041EF8399500C059BC /* indigo_guider_asi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = indigo_guider_asi.h; sourceTree = "<group>"; };
@@ -926,6 +928,13 @@
 		59E38B511F1577A000187839 /* indigo_ica_ptp_nikon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = indigo_ica_ptp_nikon.h; sourceTree = "<group>"; };
 		59E38B521F1577A000187839 /* indigo_ica_ptp_nikon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = indigo_ica_ptp_nikon.m; sourceTree = "<group>"; };
 		59E67789212C8042004B99BE /* Protocol_V2.0.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Protocol_V2.0.pdf; sourceTree = "<group>"; };
+		59EC55982180E83E008DFB4C /* tcf_technical_manual.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = tcf_technical_manual.pdf; sourceTree = "<group>"; };
+		59EC559B218103EB008DFB4C /* default.img */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.img; sourceTree = "<group>"; };
+		59EC559C218103EB008DFB4C /* memfifo.bit */ = {isa = PBXFileReference; lastKnownFileType = file; path = memfifo.bit; sourceTree = "<group>"; };
+		59EC559E218103EB008DFB4C /* AtikCameras.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AtikCameras.h; sourceTree = "<group>"; };
+		59EC55A1218103EB008DFB4C /* libatikcameras.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libatikcameras.dylib; sourceTree = "<group>"; };
+		59EC55A8218103EB008DFB4C /* AtikCameras.dll Guide.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AtikCameras.dll Guide.pdf"; sourceTree = "<group>"; };
+		59EC55A9218103EB008DFB4C /* AtikHorizon Guide.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AtikHorizon Guide.pdf"; sourceTree = "<group>"; };
 		59F0FE2C2083EA47001B34E9 /* indigo_ccd_simulator_data.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = indigo_ccd_simulator_data.c; sourceTree = "<group>"; };
 		59F4EC701E941D1700CC7772 /* indigo_ccd_sbig.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = indigo_ccd_sbig.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		59F4EC711E941D1700CC7772 /* indigo_ccd_sbig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = indigo_ccd_sbig.h; sourceTree = "<group>"; };
@@ -1686,7 +1695,6 @@
 				59292E5720D4224F0042E939 /* libcurl.tbd in Frameworks */,
 				59986D751F9BA10900D68DC1 /* libqsiapi.a in Frameworks */,
 				590B59D71F79A68100086FD2 /* libnovas.a in Frameworks */,
-				9DAC59CF1DC0A7B200AE410D /* libatik.a in Frameworks */,
 				5981C8E11DC291C100C7705F /* libfcusb.a in Frameworks */,
 				599C9A651DA0297E008BBCC1 /* libindigo.a in Frameworks */,
 				59F756241DCE501F002CFC82 /* libhidapi.dylib in Frameworks */,
@@ -1696,7 +1704,9 @@
 				9DBC34751DCB270200588DB9 /* libstdc++.tbd in Frameworks */,
 				9DBC34731DCB26F200588DB9 /* IOKit.framework in Frameworks */,
 				9DBC34711DCB26E500588DB9 /* Cocoa.framework in Frameworks */,
+				59C0EB91218117EF003CB7DA /* libatikcameras.dylib in Frameworks */,
 				9D07F7D2216F5EEE00330726 /* libtoupcam.dylib in Frameworks */,
+				59C0EB93218118E3003CB7DA /* libatik.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2124,7 +2134,7 @@
 				59399D8E2177D316002886CA /* indigo_focuser_optec.h */,
 				59399D892177D316002886CA /* indigo_focuser_optec.c */,
 				59399D8A2177D316002886CA /* indigo_focuser_optec_main.c */,
-				59399D8F2177D391002886CA /* tcf_technical_manual.pdf */,
+				59EC55982180E83E008DFB4C /* tcf_technical_manual.pdf */,
 				59399D8C2177D316002886CA /* optec_simulator */,
 			);
 			path = focuser_optec;
@@ -2399,6 +2409,7 @@
 		599A23F31DBEA5820020BF8F /* bin_externals */ = {
 			isa = PBXGroup;
 			children = (
+				59EC5599218103EB008DFB4C /* libatikcameras */,
 				9D9EA6A71DBE219C00E11841 /* libatik */,
 			);
 			path = bin_externals;
@@ -2761,6 +2772,99 @@
 				59DD69D11FC1DC4900AEF0DF /* indigo_dome_simulator_main.c */,
 			);
 			path = dome_simulator;
+			sourceTree = "<group>";
+		};
+		59EC5599218103EB008DFB4C /* libatikcameras */ = {
+			isa = PBXGroup;
+			children = (
+				59EC559A218103EB008DFB4C /* firmware */,
+				59EC559D218103EB008DFB4C /* include */,
+				59EC559F218103EB008DFB4C /* lib */,
+				59EC55A7218103EB008DFB4C /* doc */,
+			);
+			path = libatikcameras;
+			sourceTree = "<group>";
+		};
+		59EC559A218103EB008DFB4C /* firmware */ = {
+			isa = PBXGroup;
+			children = (
+				59EC559B218103EB008DFB4C /* default.img */,
+				59EC559C218103EB008DFB4C /* memfifo.bit */,
+			);
+			path = firmware;
+			sourceTree = "<group>";
+		};
+		59EC559D218103EB008DFB4C /* include */ = {
+			isa = PBXGroup;
+			children = (
+				59EC559E218103EB008DFB4C /* AtikCameras.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		59EC559F218103EB008DFB4C /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				59EC55A0218103EB008DFB4C /* macOS */,
+				59EC55A2218103EB008DFB4C /* Linux */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		59EC55A0218103EB008DFB4C /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				59EC55A1218103EB008DFB4C /* libatikcameras.dylib */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		59EC55A2218103EB008DFB4C /* Linux */ = {
+			isa = PBXGroup;
+			children = (
+				59EC55A3218103EB008DFB4C /* x64 */,
+				59EC55A4218103EB008DFB4C /* x86 */,
+				59EC55A5218103EB008DFB4C /* arm */,
+				59EC55A6218103EB008DFB4C /* arm64 */,
+			);
+			path = Linux;
+			sourceTree = "<group>";
+		};
+		59EC55A3218103EB008DFB4C /* x64 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = x64;
+			sourceTree = "<group>";
+		};
+		59EC55A4218103EB008DFB4C /* x86 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = x86;
+			sourceTree = "<group>";
+		};
+		59EC55A5218103EB008DFB4C /* arm */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = arm;
+			sourceTree = "<group>";
+		};
+		59EC55A6218103EB008DFB4C /* arm64 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = arm64;
+			sourceTree = "<group>";
+		};
+		59EC55A7218103EB008DFB4C /* doc */ = {
+			isa = PBXGroup;
+			children = (
+				59EC55A8218103EB008DFB4C /* AtikCameras.dll Guide.pdf */,
+				59EC55A9218103EB008DFB4C /* AtikHorizon Guide.pdf */,
+			);
+			path = doc;
 			sourceTree = "<group>";
 		};
 		59F4EC6F1E941CF400CC7772 /* ccd_sbig */ = {
@@ -4944,6 +5048,7 @@
 					"$(PROJECT_DIR)/indigo_drivers/wheel_asi/bin_externals/libEFWFilter/lib/mac",
 					"$(PROJECT_DIR)/build/lib",
 					"$(PROJECT_DIR)/indigo_drivers/ccd_touptek/bin_externals/libtoupcam/lib/macOS",
+					"$(PROJECT_DIR)/indigo_drivers/ccd_atik/bin_externals/libatikcameras/lib/macOS",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4962,6 +5067,7 @@
 					"$(PROJECT_DIR)/indigo_drivers/wheel_asi/bin_externals/libEFWFilter/lib/mac",
 					"$(PROJECT_DIR)/build/lib",
 					"$(PROJECT_DIR)/indigo_drivers/ccd_touptek/bin_externals/libtoupcam/lib/macOS",
+					"$(PROJECT_DIR)/indigo_drivers/ccd_atik/bin_externals/libatikcameras/lib/macOS",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
