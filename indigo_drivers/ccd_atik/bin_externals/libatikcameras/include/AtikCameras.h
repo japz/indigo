@@ -8,6 +8,8 @@ extern "C" {
 
 #ifdef WIN32
 	#include <Windows.h>	
+#else
+    #include <libusb-1.0/libusb.h>
 #endif
 
     enum ARTEMISERROR
@@ -173,6 +175,7 @@ extern "C" {
 	bool			ArtemisDeviceIsCamera( int iDevice);
     bool			ArtemisDeviceHasFilterWheel(int iDevice);
 	bool			ArtemisDeviceHasGuidePort(int iDevice);
+    bool			ArtemisDeviceGetLibUSBDevice(int iDevice, libusb_device ** device);
 	ArtemisHandle	ArtemisConnect(        int iDevice);
 	bool			ArtemisIsConnected(ArtemisHandle hCam);
 	bool			ArtemisDisconnect( ArtemisHandle handle);

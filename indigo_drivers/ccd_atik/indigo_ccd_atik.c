@@ -529,34 +529,34 @@ static indigo_result wheel_detach(indigo_device *device) {
 
 static indigo_device *devices[MAX_DEVICES];
 
-static int hotplug_callback(libusb_context *ctx, libusb_device *dev, libusb_hotplug_event event, void *user_data) {
-	static indigo_device ccd_template = INDIGO_DEVICE_INITIALIZER(
-		"",
-		ccd_attach,
-		indigo_ccd_enumerate_properties,
-		ccd_change_property,
-		NULL,
-		ccd_detach
-	);
-	static indigo_device guider_template = INDIGO_DEVICE_INITIALIZER(
-		"",
-		guider_attach,
-		indigo_guider_enumerate_properties,
-		guider_change_property,
-		NULL,
-		guider_detach
-	);
-	static indigo_device wheel_template = INDIGO_DEVICE_INITIALIZER(
-		"",
-		wheel_attach,
-		indigo_wheel_enumerate_properties,
-		wheel_change_property,
-		NULL,
-		wheel_detach
-	);
-	//pthread_mutex_lock(&device_mutex);
-	switch (event) {
-		case LIBUSB_HOTPLUG_EVENT_DEVICE_ARRIVED: {
+//static int hotplug_callback(libusb_context *ctx, libusb_device *dev, libusb_hotplug_event event, void *user_data) {
+//	static indigo_device ccd_template = INDIGO_DEVICE_INITIALIZER(
+//		"",
+//		ccd_attach,
+//		indigo_ccd_enumerate_properties,
+//		ccd_change_property,
+//		NULL,
+//		ccd_detach
+//	);
+//	static indigo_device guider_template = INDIGO_DEVICE_INITIALIZER(
+//		"",
+//		guider_attach,
+//		indigo_guider_enumerate_properties,
+//		guider_change_property,
+//		NULL,
+//		guider_detach
+//	);
+//	static indigo_device wheel_template = INDIGO_DEVICE_INITIALIZER(
+//		"",
+//		wheel_attach,
+//		indigo_wheel_enumerate_properties,
+//		wheel_change_property,
+//		NULL,
+//		wheel_detach
+//	);
+//	//pthread_mutex_lock(&device_mutex);
+//	switch (event) {
+//		case LIBUSB_HOTPLUG_EVENT_DEVICE_ARRIVED: {
 //			libatik_camera_type type;
 //			const char *name;
 //			bool is_guider, has_fw;
@@ -610,9 +610,9 @@ static int hotplug_callback(libusb_context *ctx, libusb_device *dev, libusb_hotp
 //					}
 //				}
 //			}
-			break;
-		}
-		case LIBUSB_HOTPLUG_EVENT_DEVICE_LEFT: {
+//			break;
+//		}
+//		case LIBUSB_HOTPLUG_EVENT_DEVICE_LEFT: {
 //			atik_private_data *private_data = NULL;
 //			for (int j = 0; j < MAX_DEVICES; j++) {
 //				if (devices[j] != NULL) {
@@ -630,22 +630,49 @@ static int hotplug_callback(libusb_context *ctx, libusb_device *dev, libusb_hotp
 //				if (private_data->buffer != NULL) free(private_data->buffer);
 //				free(private_data);
 //			}
+//			break;
+//		}
+//	}
+//	//pthread_mutex_unlock(&device_mutex);
+//	return 0;
+//}
+
+static void plug_handler(indigo_device *device) {
+	indigo_debug("plug_handler");
+	for (int i = 0; i < 5; i++) {
+		indigo_debug("%d %d", i, ArtemisDeviceIsPresent(i));
+	}
+}
+
+static void unplug_handler(indigo_device *device) {
+	indigo_debug("unplug_handler");
+	for (int i = 0; i < 5; i++) {
+		indigo_debug("%d %d", i, ArtemisDeviceIsPresent(i));
+	}
+}
+
+static int hotplug_callback(libusb_context *ctx, libusb_device *dev, libusb_hotplug_event event, void *user_data) {
+	switch (event) {
+		case LIBUSB_HOTPLUG_EVENT_DEVICE_ARRIVED: {
+			indigo_set_timer(NULL, 0.5, plug_handler);
+			break;
+		}
+		case LIBUSB_HOTPLUG_EVENT_DEVICE_LEFT: {
+			indigo_set_timer(NULL, 0.5, unplug_handler);
 			break;
 		}
 	}
-	//pthread_mutex_unlock(&device_mutex);
 	return 0;
 }
 
 static libusb_hotplug_callback_handle callback_handle1, callback_handle2;
 
 static void debug_log(const char *message) {
-	indigo_debug("%s: %s", DRIVER_NAME, message);
+	//indigo_debug("%s: SDK - %s", DRIVER_NAME, message);
 }
 
 indigo_result indigo_ccd_atik(indigo_driver_action action, indigo_driver_info *info) {
 	ArtemisSetDebugCallback(debug_log);
-	//ArtemisAllowDebugToConsole(true);
 	
 	static indigo_driver_action last_action = INDIGO_DRIVER_SHUTDOWN;
 

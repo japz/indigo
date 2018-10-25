@@ -4251,9 +4251,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9D97F8141D9A8A1900582EAF /* Build configuration list for PBXNativeTarget "indigo_server" */;
 			buildPhases = (
+				9D97F8131D9A8A1900582EAF /* CopyFiles */,
 				9D97F80A1D9A8A1900582EAF /* Sources */,
 				9D97F8121D9A8A1900582EAF /* Frameworks */,
-				9D97F8131D9A8A1900582EAF /* CopyFiles */,
 			);
 			buildRules = (
 			);
