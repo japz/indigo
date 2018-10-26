@@ -180,6 +180,7 @@ extern "C" {
 	bool			ArtemisIsConnected(ArtemisHandle hCam);
 	bool			ArtemisDisconnect( ArtemisHandle handle);
 	int				ArtemisRefreshDevicesCount();
+	int				ArtemisDeviceCount();
 
 	// ------------------- Camera Info -----------------------------------
 	int  ArtemisCameraSerial(	 ArtemisHandle hCam, int* flags, int* serial);
