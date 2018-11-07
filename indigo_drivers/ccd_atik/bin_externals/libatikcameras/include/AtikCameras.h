@@ -164,7 +164,7 @@ extern "C" {
 	void ArtemisAllowDebugToConsole(bool value);
     void ArtemisSetDebugCallback(void(*callback)(const char *message));
 	void ArtemisSetFirmwareDir(const char * firmwareDir);
-    void ArtemisShutdown();
+    void ArtemisShutdown(); 
 
 	// -------------------  Device --------------------------
 	bool			ArtemisDeviceIsPresent(int iDevice);
@@ -175,7 +175,7 @@ extern "C" {
 	bool			ArtemisDeviceIsCamera( int iDevice);
     bool			ArtemisDeviceHasFilterWheel(int iDevice);
 	bool			ArtemisDeviceHasGuidePort(int iDevice);
-    bool			ArtemisDeviceGetLibUSBDevice(int iDevice, libusb_device ** device);
+    int  			ArtemisDeviceGetLibUSBDevice(int iDevice, libusb_device ** device);
 	ArtemisHandle	ArtemisConnect(        int iDevice);
 	bool			ArtemisIsConnected(ArtemisHandle hCam);
 	bool			ArtemisDisconnect( ArtemisHandle handle);
@@ -214,11 +214,11 @@ extern "C" {
 	int  ArtemisSetProcessing(                   ArtemisHandle hCam, int options); // Set current image processing options
 
 	// ------------------- Exposures -----------------------------------
-	int ArtemisStartExposure(               ArtemisHandle hCam, float seconds);
-	int ArtemisStartExposureMS(             ArtemisHandle hCam, int ms);
-	int ArtemisAbortExposure(               ArtemisHandle hCam);
-	int ArtemisStopExposure(                ArtemisHandle hCam);
-	bool ArtemisImageReady(                 ArtemisHandle hCam);
+	int   ArtemisStartExposure(             ArtemisHandle hCam, float seconds);
+	int   ArtemisStartExposureMS(           ArtemisHandle hCam, int ms);
+	int   ArtemisAbortExposure(             ArtemisHandle hCam);
+	int   ArtemisStopExposure(              ArtemisHandle hCam);
+	bool  ArtemisImageReady(                ArtemisHandle hCam);
 	int   ArtemisCameraState(               ArtemisHandle hCam);
 	float ArtemisExposureTimeRemaining(     ArtemisHandle hCam);
 	int   ArtemisDownloadPercent(           ArtemisHandle hCam);

@@ -245,15 +245,15 @@ static indigo_result ccd_change_property(indigo_device *device, indigo_client *c
 				ArtemisSetDarkMode(PRIVATE_DATA->handle, CCD_FRAME_TYPE_DARK_ITEM->sw.value);
 				ArtemisBin(PRIVATE_DATA->handle, (int)CCD_BIN_HORIZONTAL_ITEM->number.value, (int)CCD_BIN_VERTICAL_ITEM->number.value);
 				ArtemisSubframe(PRIVATE_DATA->handle, (int)CCD_FRAME_LEFT_ITEM->number.value, (int)CCD_FRAME_TOP_ITEM->number.value, (int)CCD_FRAME_WIDTH_ITEM->number.value, (int)CCD_FRAME_HEIGHT_ITEM->number.value);
-				ArtemisStartExposure(PRIVATE_DATA->handle, CCD_EXPOSURE_ITEM->number.target); // return value?
-				PRIVATE_DATA->exposure_timer = indigo_set_timer(device, CCD_EXPOSURE_ITEM->number.target, exposure_timer_callback);
-//				if (ArtemisStartExposure(PRIVATE_DATA->handle, CCD_EXPOSURE_ITEM->number.target) == ARTEMIS_OK) {
-//					PRIVATE_DATA->exposure_timer = indigo_set_timer(device, CCD_EXPOSURE_ITEM->number.target, exposure_timer_callback);
-//				} else {
-//					CCD_EXPOSURE_PROPERTY->state = INDIGO_ALERT_STATE;
-//					indigo_update_property(device, CCD_EXPOSURE_PROPERTY, NULL);
-//					return INDIGO_OK;
-//				}
+//				ArtemisStartExposure(PRIVATE_DATA->handle, CCD_EXPOSURE_ITEM->number.target); // return value?
+//				PRIVATE_DATA->exposure_timer = indigo_set_timer(device, CCD_EXPOSURE_ITEM->number.target, exposure_timer_callback);
+				if (ArtemisStartExposure(PRIVATE_DATA->handle, CCD_EXPOSURE_ITEM->number.target) == ARTEMIS_OK) {
+					PRIVATE_DATA->exposure_timer = indigo_set_timer(device, CCD_EXPOSURE_ITEM->number.target, exposure_timer_callback);
+				} else {
+					CCD_EXPOSURE_PROPERTY->state = INDIGO_ALERT_STATE;
+					indigo_update_property(device, CCD_EXPOSURE_PROPERTY, NULL);
+					return INDIGO_OK;
+				}
 				break;
 			} else if (state == CAMERA_FLUSHING) {
 				usleep(1000);
@@ -591,13 +591,14 @@ static void plug_handler(indigo_device *device) {
 	int count = ArtemisDeviceCount();
 	for (int j = 0; j < count; j++) {
 		libusb_device *dev;
-		ArtemisDeviceGetLibUSBDevice(j, &dev); // return value?
-		for (int i = 0; i < MAX_DEVICES; i++) {
-			indigo_device *device = devices[i];
-			if (device && PRIVATE_DATA->dev == dev) {
-				PRIVATE_DATA->index = j;
-				dev = NULL;
-				break;
+		if (ArtemisDeviceGetLibUSBDevice(j, &dev) == ARTEMIS_OK) {
+			for (int i = 0; i < MAX_DEVICES; i++) {
+				indigo_device *device = devices[i];
+				if (device && PRIVATE_DATA->dev == dev) {
+					PRIVATE_DATA->index = j;
+					dev = NULL;
+					break;
+				}
 			}
 		}
 		if (dev) {
@@ -664,13 +665,14 @@ static void unplug_handler(indigo_device *device) {
 	int count = ArtemisDeviceCount();
 	for (int j = 0; j < count; j++) {
 		libusb_device *dev;
-		ArtemisDeviceGetLibUSBDevice(j, &dev); // return value?
-		for (int i = 0; i < MAX_DEVICES; i++) {
-			indigo_device *device = devices[i];
-			if (device && PRIVATE_DATA->dev == dev) {
-				PRIVATE_DATA->index = j;
-				dev = NULL;
-				break;
+		if (ArtemisDeviceGetLibUSBDevice(j, &dev) == ARTEMIS_OK) {
+			for (int i = 0; i < MAX_DEVICES; i++) {
+				indigo_device *device = devices[i];
+				if (device && PRIVATE_DATA->dev == dev) {
+					PRIVATE_DATA->index = j;
+					dev = NULL;
+					break;
+				}
 			}
 		}
 	}
@@ -712,7 +714,7 @@ static void debug_log(const char *message) {
 }
 
 indigo_result indigo_ccd_atik(indigo_driver_action action, indigo_driver_info *info) {
-	//ArtemisSetDebugCallback(debug_log);
+	ArtemisSetDebugCallback(debug_log);
 	
 	static indigo_driver_action last_action = INDIGO_DRIVER_SHUTDOWN;
 
