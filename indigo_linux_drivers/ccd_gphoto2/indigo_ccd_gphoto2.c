@@ -159,6 +159,16 @@ enum vendor {
 	OTHER
 };
 
+const char * sony_shutterspeeds[] = {
+	"100/10",
+	"130/10",
+	"150/10",
+	"200/10",
+	"250/10",
+	"300/10",
+};
+#define sony_shutterspeeds_count (sizeof (sony_shutterspeeds) / sizeof (const char *))
+
 struct gphoto2_id_s {
 	char name[32];
 	char name_extended[128];
@@ -468,7 +478,6 @@ static int lookup_widget(CameraWidget *widget, const char *key,
 	rc = gp_widget_get_child_by_name(widget, key, child);
 	if (rc < GP_OK)
 		rc = gp_widget_get_child_by_label(widget, key, child);
-
 	return rc;
 }
 
@@ -592,6 +601,34 @@ static int enumerate_widget(const char *key, indigo_device *device,
 					label,
 					val && !strcmp(val, widget_choice));
 		i++;
+	}
+
+	if (key == EOS_SHUTTERSPEED && PRIVATE_DATA->vendor == SONY) {
+		/* Ugly hack to fill missing sony shutterspeed values */
+		INDIGO_DRIVER_LOG(DRIVER_NAME, "Ugly sony hack loaded", val);
+		int j = 0;
+		const char *this_choice;
+
+		while (j < sony_shutterspeeds_count) {
+
+			char label[16] = {0};
+			this_choice = sony_shutterspeeds[j];
+
+			strncpy(label, this_choice, sizeof(label) - 1);
+			double shutter_d;
+			INDIGO_DRIVER_LOG(DRIVER_NAME, "[%d] Adding shutter speed %s", i, this_choice);
+			shutter_d = parse_shutterspeed(this_choice);
+			INDIGO_DRIVER_LOG(DRIVER_NAME, "[%d] Shutter speed is %f", i, shutter_d);
+			if (shutter_d > 0.0)
+				snprintf(label, sizeof(label), "%f", shutter_d);
+			INDIGO_DRIVER_LOG(DRIVER_NAME, "[%d] Label is %s", i, label);
+
+			indigo_init_switch_item(property->items + i,
+				this_choice,
+				label,
+				val && !strcmp(val, this_choice));
+			j++;
+		}
 	}
 
 cleanup:
@@ -1353,14 +1390,14 @@ static indigo_result ccd_attach(indigo_device *device)
 		/*------------------------- SHUTTER-TIME -----------------------*/
 		int count = enumerate_widget(EOS_SHUTTERSPEED, device, NULL);
 		DSLR_SHUTTER_PROPERTY = indigo_init_switch_property(NULL,
-								    device->name,
-								    DSLR_SHUTTER_PROPERTY_NAME,
-								    GPHOTO2_NAME_DSLR,
-								    GPHOTO2_NAME_SHUTTER,
-								    INDIGO_OK_STATE,
-								    INDIGO_RW_PERM,
-								    INDIGO_ONE_OF_MANY_RULE,
-								    count);
+						device->name,
+						DSLR_SHUTTER_PROPERTY_NAME,
+						GPHOTO2_NAME_DSLR,
+						GPHOTO2_NAME_SHUTTER,
+						INDIGO_OK_STATE,
+						INDIGO_RW_PERM,
+						INDIGO_ONE_OF_MANY_RULE,
+						count);
 		enumerate_widget(EOS_SHUTTERSPEED, device, DSLR_SHUTTER_PROPERTY);
 
 		/*---------------------------- ISO -----------------------------*/
